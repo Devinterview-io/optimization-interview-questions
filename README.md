@@ -825,16 +825,17 @@ At its core, RMSprop is a variant of **Stochastic Gradient Descent** (SGD) and b
 
 ### Algorithm Steps
 
-1. Compute the gradient:  $g_t = \nabla J_t(\theta)$
+1. Compute the gradient:  
+![equation](https://latex.codecogs.com/gif.latex?g_t&space;=&space;\nabla&space;J_t(\theta))
+
 2. Accumulate squared gradients using a decay rate:
 
-$$
-E[g^2]_t = \gamma E[g^2]_{t-1} + (1 - \gamma) g^2_t
-$$
+![equation](https://latex.codecogs.com/gif.latex?E[g^2]_t&space;=&space;\gamma&space;E[g^2]_{t-1}&space;&plus;&space;(1&space;-&space;\gamma)&space;g^2_t)
 
-4. Update the parameters using the adjusted learning rate:  $\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{E[g^2]_t + \epsilon}} g_t$
+4. Update the parameters using the adjusted learning rate:  
+![equation](https://latex.codecogs.com/gif.latex?\theta_{t&plus;1}&space;=&space;\theta_t&space;-&space;\frac{\eta}{\sqrt{E[g^2]_t&space;&plus;&space;\epsilon}}&space;g_t)
 
-Here, $\gamma$ is the **decay rate**, usually set close to 1, and $\epsilon$ is a small **smoothing term** to prevent division by zero.
+Here, ![equation](https://latex.codecogs.com/gif.latex?\gamma) is the **decay rate**, usually set close to 1, and ![equation](https://latex.codecogs.com/gif.latex?\epsilon) is a small **smoothing term** to prevent division by zero.
 
 ### Code Example: RMSprop
 
@@ -867,31 +868,24 @@ def rmsprop_update(theta, dtheta, cache, decay_rate=0.9, learning_rate=0.001, ep
 Adam computes exponentially weighted averages of gradients and squared gradients, much like RMSProp, and additionally includes momentum updates. These are calculated at each optimization step to determine parameter updates. Let's look at the detailed formulas:
 
 **Smoothed Gradients**:
-$$
-$$
-m_t &= \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot g_t \\
-v_t &= \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot g_t^2
-$$
-$$
 
-Here, $m_t$ and $v_t$ denote the smoothed gradient and the squared smoothed gradient, respectively.
+![equation](https://latex.codecogs.com/gif.latex?m_t&space;=&space;\beta_1&space;\cdot&space;m_{t-1}&space;&plus;&space;(1&space;-&space;\beta_1)&space;\cdot&space;g_t)  
+![equation](https://latex.codecogs.com/gif.latex?v_t&space;=&space;\beta_2&space;\cdot&space;v_{t-1}&space;&plus;&space;(1&space;-&space;\beta_2)&space;\cdot&space;g_t^2)  
+
+Here, ![equation](https://latex.codecogs.com/gif.latex?m_t) and ![equation](https://latex.codecogs.com/gif.latex?v_t) denote the smoothed gradient and the squared smoothed gradient, respectively.
 
 **Bias-Corrected Averages**:
-$$
-$$
-\hat{m}_t &= \frac{m_t}{1 - \beta_1^t} \\
-\hat{v}_t &= \frac{v_t}{1 - \beta_2^t}
-$$
-$$
 
-After bias correction, $\hat{m}_t$ and $\hat{v}_t$ represent unbiased estimates of the first moment (the mean) and the second raw moment (the uncentered variance) of the gradients.
+![equation](https://latex.codecogs.com/gif.latex?\hat{m}_t&space;=&space;\frac{m_t}{1&space;-&space;\beta_1^t})  
+![equation](https://latex.codecogs.com/gif.latex?\hat{v}_t&space;=&space;\frac{v_t}{1&space;-&space;\beta_2^t})  
+
+After bias correction, ![equation](https://latex.codecogs.com/gif.latex?\hat{m}_t) and ![equation](https://latex.codecogs.com/gif.latex?\hat{v}_t) represent unbiased estimates of the first moment (the mean) and the second raw moment (the uncentered variance) of the gradients.
 
 **Parameter Update**:
-$$
-\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t
-$$
 
-Where $\eta$ is the learning rate, $\epsilon$ is a small constant for numerical stability, and $\theta$ denotes model parameters.
+![equation](https://latex.codecogs.com/gif.latex?\theta_{t&plus;1}&space;=&space;\theta_t&space;-&space;\frac{\eta}{\sqrt{\hat{v}_t}&space;&plus;&space;\epsilon}&space;\cdot&space;\hat{m}_t)  
+
+Where ![equation](https://latex.codecogs.com/gif.latex?\eta) is the learning rate, ![equation](https://latex.codecogs.com/gif.latex?\epsilon) is a small constant for numerical stability, and ![equation](https://latex.codecogs.com/gif.latex?\theta) denotes model parameters.
 
 ### Code example: Adam Optimization
 
