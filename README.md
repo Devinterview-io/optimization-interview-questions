@@ -1,4 +1,4 @@
-# 50 Essential Optimization Interview Questions in 2025
+# 50 Essential Optimization Interview Questions in 2026
 
 <div>
 <p align="center">
